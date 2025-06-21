@@ -50,11 +50,51 @@ promiseFour
 .then((user) => {
     console.log(user);
     return user.username;
-})
-.then((username)=>{
+}).then((username)=>{
     console.log(username);
     
-})
-.catch(function(message){
+}).catch(function(message){
     console.log(message);
+}).finally(()=> console.log("The promise is either resolved or rejected"))
+
+
+const promiseFive = new Promise(function(resolve, reject){
+    setTimeout(function(){
+        let error = true;
+        if(!error){
+            resolve({username:"Javascript", password:"1234"})
+        }else{
+            reject("ERROR: JS went wrong")
+        }
+    },1000)
 })
+
+
+//dusra tareeka to imply promise
+async function consumePromiseFive(){
+   try {
+    const response =  await promiseFive;
+    console.log(response);
+   } catch (error) {
+    console.log(error); 
+   }
+   
+}
+
+consumePromiseFive();
+
+async function getAllUsers() {
+    const response = await fetch('any_url.com')
+    const data = response.json()
+    console.log(data);   
+}
+
+fetch('https://api.github.com/users/subham044556')
+.then((response)=> {
+    return response.json()
+})
+.then((data) => {
+    console.log(data);
+})
+.catch((error) => console.log(error))
+
